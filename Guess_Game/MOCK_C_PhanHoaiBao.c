@@ -20,11 +20,14 @@ void playGame(struct Player *player);
 void printLuckyRatioHistory(struct Player players[], int num_players);
 
 int main()
-{
+{   
+    Label:
+    printf("\e[1;36m");
     printf("\t\t\t\t=================================================\n");
     printf("\t\t\t\t|\tWelcome to number guesting game !!!\t|\n");
     printf("\t\t\t\t=================================================\n\n");
-
+    printf("\e[0m");
+    printf("\n");
     struct Player players[MAX_PLAYERS] = {0};
     int num_players = 0;
 
@@ -47,9 +50,9 @@ int main()
         scanf(" %c", &choice);
         getchar(); // Consume newline character
 
-        if ((choice == 'Y') && (choice == 'y'))
+        if ((choice == 'Y') || (choice == 'y'))
         {
-            break;
+            goto Label;
         }
         else
         {
@@ -152,7 +155,7 @@ void printLuckyRatioHistory(struct Player players[], int num_players)
     }
 
     // Print lucky ratio history
-    for (int i = 0; i < num_players && i < MAX_PLAYERS; ++i)
+    for (int i = 0; (i < num_players) && (i < MAX_PLAYERS); ++i)
     {
         printf("%d. %s: %.2f\n", i + 1, players[i].max_name, players[i].lucky_ratio);
     }
